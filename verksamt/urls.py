@@ -14,12 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 
+from verksamt import settings
 from .authviews import login, login_with_token, logout
+
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', login, name='login'),
-    url(r'^login/(?P<token>.+)/$', login_with_token, name='login_with_token'),
-    url(r'^logout/', logout, name='logout'),
-]
+                  url(r'^admin/', include(admin.site.urls)),
+                  url(r'^login/$', login, name='login'),
+                  url(r'^login/(?P<token>.+)/$', login_with_token, name='login_with_token'),
+                  url(r'^logout/', logout, name='logout'),
+                  url(r'^', include("verksamhetsplan.urls"))
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

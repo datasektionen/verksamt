@@ -16,12 +16,12 @@ class OperationalArea(models.Model):
 
 
 class LongTermGoal(models.Model):
-    goal = models.TextField()
+    goaltext = models.TextField()
     description = models.TextField()
     operational_area = models.ForeignKey(OperationalArea, on_delete=models.CASCADE)
 
     def __unicode__(self):
-        return str(self.goal)
+        return str(self.goaltext)
 
     def first_year(self):
         return Year.objects.filter(goal__in=self.goal_set).first()
