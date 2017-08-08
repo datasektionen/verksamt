@@ -1,11 +1,12 @@
 from django.db import models
 
 
-class Year(models.Model):
-    name = models.TextField()
+class OperationalPlan(models.Model):
+    year = models.TextField()
+    description = models.TextField()
 
     def __unicode__(self):
-        return str(self.name)
+        return str(self.year)
 
 
 class OperationalArea(models.Model):
@@ -24,11 +25,11 @@ class LongTermGoal(models.Model):
         return str(self.goaltext)
 
     def first_year(self):
-        return Year.objects.filter(goal__in=self.goal_set).first()
+        return OperationalPlan.objects.filter(goal__in=self.goal_set).first()
 
 
 class Goal(models.Model):
-    year = models.ForeignKey(Year, on_delete=models.CASCADE)
+    year = models.ForeignKey(OperationalPlan, on_delete=models.CASCADE)
     long_term_goal = models.ForeignKey(LongTermGoal, on_delete=models.CASCADE)
     goal = models.TextField()
     description = models.TextField()
