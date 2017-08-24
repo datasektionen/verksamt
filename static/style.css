@@ -1,5 +1,10 @@
+#goaltext {
+    font-size: 30px;
+    color: #3f51b5;
+}
+
 #footer {
-    background: #333333;
+    background: #500;
     margin: 50px -50px -50px;
     padding-bottom: 30px;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
