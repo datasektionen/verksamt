@@ -1,6 +1,17 @@
 from django.db import models
 
 
+class Status(models.Model):
+    name = models.CharField(max_length=10)
+    colour = models.CharField(max_length=7)
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
+
 class OperationalPlan(models.Model):
     year = models.TextField()
     description = models.TextField()
@@ -22,10 +33,21 @@ class OperationalArea(models.Model):
         return self.name
 
 
+class SubArea(models.Model):
+    name = models.TextField()
+    operational_area = models.ForeignKey(OperationalArea, on_delete=models.CASCADE)
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
+
 class LongTermGoal(models.Model):
     goaltext = models.TextField()
     description = models.TextField(default="", blank=True)
-    operational_area = models.ForeignKey(OperationalArea, on_delete=models.CASCADE)
+    sub_area = models.ForeignKey(SubArea, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.goaltext
@@ -42,19 +64,10 @@ class Goal(models.Model):
     long_term_goal = models.ForeignKey(LongTermGoal, on_delete=models.CASCADE)
     goal = models.TextField()
     description = models.TextField(default="", blank=True)
+    status = models.ForeignKey(Status, null=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return self.goal
 
     def __str__(self):
         return self.goal
-
-
-class Status(models.Model):
-    name = models.CharField(max_length=10)
-
-    def __unicode__(self):
-        return self.name
-
-    def __str__(self):
-        return self.name
