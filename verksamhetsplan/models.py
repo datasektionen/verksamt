@@ -3,7 +3,7 @@ from django.db import models
 
 class Status(models.Model):
     name = models.CharField(max_length=10)
-    colour = models.CharField(max_length=7)
+    color = models.CharField(max_length=7)
 
     def __unicode__(self):
         return self.name
