@@ -48,6 +48,7 @@ class LongTermGoal(models.Model):
     goaltext = models.TextField()
     description = models.TextField(default="", blank=True)
     sub_area = models.ForeignKey(SubArea, on_delete=models.CASCADE)
+    status = models.ForeignKey(Status, null=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return self.goaltext
