@@ -1,0 +1,28 @@
+{% extends 'verksamhetsplan/main.html' %}
+
+{% block title %}{{ long_term_goal.sub_area.operational_area.name }}{% endblock %}
+
+{% block full_content %}
+    <div class="col-md-10 col-md-offset-1">
+        <h1>Flerårigt mål</h1>
+        <h2>Mål</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">{{ long_term_goal.goaltext }}</div>
+        </div>
+        {% if long_term_goal.description %}
+            <h2>Beskrivning</h2>
+            <p>{{ long_term_goal.description }}</p>
+        {% endif %}
+        <h2>Kortsiktiga delmål</h2>
+        {% for goal in goals %}
+            {% ifchanged goal.year %}
+                <h3>{{ goal.year }}</h3>
+            {% endifchanged %}
+            {% include "verksamhetsplan/goaldiv.html" %}
+        {% empty %}
+            Det finns inga delmål
+        {% endfor %}
+        <h2>Kommentarer</h2>
+        ToDo
+    </div>
+{% endblock %}
