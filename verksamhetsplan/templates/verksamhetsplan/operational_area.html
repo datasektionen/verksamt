@@ -1,0 +1,22 @@
+{% extends 'verksamhetsplan/main.html' %}
+
+{% block title %}{{ operational_area.name }}{% endblock %}
+
+{% block full_content %}
+    <div>
+        {% for goal in goals %}
+            {% ifchanged goal.long_term_goal.sub_area %}
+                <div class="area">
+                    {{ goal.long_term_goal.sub_area }}
+                </div>
+            {% endifchanged %}
+            {% ifchanged goal.long_term_goal %}
+                <div class="major_goal" onclick="window.location='{% url 'vp-long_goal' goal.long_term_goal.id %}'">
+                    <div>{{ goal.long_term_goal }}</div>
+                </div>
+
+            {% endifchanged %}
+            {% include "verksamhetsplan/goaldiv.html" %}
+        {% endfor %}
+    </div>
+{% endblock %}
