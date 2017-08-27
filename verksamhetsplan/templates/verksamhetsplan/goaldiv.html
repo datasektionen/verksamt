@@ -1,4 +1,6 @@
-<div class="minor_goal clearfix" style="border-color: {{ goal.status.color }}">
+<div class="minor_goal clearfix" style="border-color: {{ goal.status.color }}"
+     onclick="window.location='{% url 'vp-goal' goal.id %}'"
+>
     <div class="col-md-10">{{ goal.goal }}</div>
     <div class="col-md-2">
         <div class="col-md-5 col-md-offset-6 statustext">{{ goal.status }}</div>
