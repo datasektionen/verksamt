@@ -1,6 +1,35 @@
 {% extends "verksamhetsplan/main.html" %}
 
+{% block title %}{{ goal.long_term_goal.sub_area.operational_area.name }}{% endblock %}
+
 {% block full_content %}
-    <h1 id="goaltext">{{ goal.goal }}</h1>
-    <p> {{ goal.description }}</p>
+
+    <div class="col-md-10 col-md-offset-1">
+        <ol class="breadcrumb">
+          <li><a href="#">{{ goal.year }}</a></li>
+          <li><a href="{% url 'vp-operational_area' goal.year goal.long_term_goal.sub_area.operational_area %}">
+              {{ goal.long_term_goal.sub_area.operational_area }}
+          </a></li>
+          <li><a href="{% url 'vp-long_goal' goal.long_term_goal.id %}">
+              Långsiktigt mål
+          </a></li>
+          <li class="active">Mål</li>
+        </ol>
+        <h1>Mål
+            <div class="float-right label label-status"
+                 style="background: {{ goal.status.color }};">
+                    {{ goal.status }}
+            </div>
+        </h1>
+
+
+        <div class="well goaltext">{{ goal.goal }}</div>
+
+
+        <h2>Beskrivning</h2>
+        <p> {{ goal.description }}</p>
+
+        <h2>Kommentarer</h2>
+        ToDo
+    </div>
 {% endblock %}

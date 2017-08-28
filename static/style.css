@@ -1,8 +1,3 @@
-#goaltext {
-    font-size: 30px;
-    color: #3f51b5;
-}
-
 #footer {
     background: #333333;
     margin: 50px -50px -50px;
@@ -42,6 +37,16 @@
 .statustext {
     font-weight: bold;
     text-align: right;
+}
+
+.label-status {
+    color: #292724;
+    float: right;
+}
+
+.goaltext {
+    background: #e0e1fa;
+    padding: 10px;
 }
 
 #content {
