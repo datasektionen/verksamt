@@ -30,6 +30,18 @@ def long_term_goal_by_id(request, pk):
         raise Http404("Målet finns inte")
 
 
+def get_operational_plan(request, year):
+    try:
+        year = models.OperationalPlan.objects.get(year=year)
+    except ObjectDoesNotExist:
+        raise Http404("Verksamhetsåret finns inte.")
+
+    return render(request, "verksamhetsplan/operational_plan.html", {
+        'operational_plan': year,
+        'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=year).distinct()
+    })
+
+
 def get_operational_area(request, year, area_name):
     try:
         year = models.OperationalPlan.objects.get(year=year)

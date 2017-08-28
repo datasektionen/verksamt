@@ -6,7 +6,7 @@
 
     <div class="col-md-10 col-md-offset-1">
         <ol class="breadcrumb">
-          <li><a href="#">{{ goal.year }}</a></li>
+            <li><a href="{% url 'vp-operational_plan' goal.year %}">{{ goal.year }}</a></li>
           <li><a href="{% url 'vp-operational_area' goal.year goal.long_term_goal.sub_area.operational_area %}">
               {{ goal.long_term_goal.sub_area.operational_area }}
           </a></li>

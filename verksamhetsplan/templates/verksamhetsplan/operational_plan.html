@@ -1,0 +1,15 @@
+{% extends 'verksamhetsplan/main.html' %}
+
+{% block full_content %}
+    <div class="col-md-10 col-md-offset-1">
+        <h1>Verksamhetsplanen {{ operational_plan.year }}</h1>
+        {{ operational_plan.description|safe }}
+
+        <h2>Verksamhetsområden</h2>
+        <ul>
+            {% for area in operational_areas %}
+                <li><a href="{% url 'vp-operational_area' operational_plan.year area %}">{{ area }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
