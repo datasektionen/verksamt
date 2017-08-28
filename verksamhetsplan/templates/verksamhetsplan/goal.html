@@ -25,10 +25,10 @@
 
         <div class="well goaltext">{{ goal.goal }}</div>
 
-
-        <h2>Beskrivning</h2>
-        <p> {{ goal.description }}</p>
-
+        {% if goal.description %}
+            <h2>Beskrivning</h2>
+            <p> {{ goal.description }}</p>
+        {% endif %}
         <h2>Kommentarer</h2>
         ToDo
     </div>
