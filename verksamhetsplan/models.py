@@ -77,8 +77,8 @@ class Goal(models.Model):
 
 class Comment(models.Model):
     # Comment should belong to one of the following two goaltypes
-    goal = models.ForeignKey(Goal, null=True)
-    long_term_goal = models.ForeignKey(LongTermGoal, null=True)
+    goal = models.ForeignKey(Goal, null=True, blank=True)
+    long_term_goal = models.ForeignKey(LongTermGoal, null=True, blank=True)
 
     author = models.ForeignKey(User)
     content = models.TextField()
