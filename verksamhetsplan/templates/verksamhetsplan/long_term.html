@@ -5,9 +5,8 @@
 {% block full_content %}
     <div class="col-md-10 col-md-offset-1">
         <h1>Flerårigt mål</h1>
-        <h2>Mål</h2>
-        <div class="panel panel-default">
-            <div class="panel-body">{{ long_term_goal.goaltext }}</div>
+        <div class="well goaltext">
+            {{ long_term_goal.goaltext }}
         </div>
         {% if long_term_goal.description %}
             <h2>Beskrivning</h2>
