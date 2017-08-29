@@ -30,6 +30,11 @@
             <p> {{ goal.description }}</p>
         {% endif %}
         <h2>Kommentarer</h2>
-        ToDo
+        {% for comment in goal.comment_set.all %}
+            {% include "verksamhetsplan/commentdiv.html" %}
+        {% empty %}
+            Det finns inga kommentarer.
+        {% endfor %}
+
     </div>
 {% endblock %}
