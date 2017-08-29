@@ -27,5 +27,8 @@
         {% empty %}
             Det finns inga kommentarer.
         {% endfor %}
+        {% if user.is_authenticated %}
+            {% include "verksamhetsplan/create_comment.html" %}
+        {% endif %}
     </div>
 {% endblock %}
