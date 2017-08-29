@@ -82,7 +82,7 @@ class Comment(models.Model):
 
     author = models.ForeignKey(User)
     content = models.TextField()
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.content
