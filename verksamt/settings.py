@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'very_secret_secret_that_is_totaly_random')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', False))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
