@@ -12,7 +12,12 @@ def goal_by_id(request, pk):
     try:
         goal = models.Goal.objects.get(pk=int(pk))
         if request.method == 'GET':
-            return render(request, "verksamhetsplan/goal.html", {'goal': goal})
+            return render(request, "verksamhetsplan/goal.html", {
+                'goal': goal,
+                'current_plan': goal.year,
+                'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=goal.year)
+                          .order_by('id').distinct()
+            })
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
 
@@ -37,7 +42,6 @@ def edit_goal(request, pk):
         if received_form.is_valid():
             received_form.save()
         return HttpResponseRedirect(reverse('vp-goal', args=[goal.id]))
-
 
 
 def create_comment(request, pk):

@@ -1,8 +1,31 @@
 {% extends "main.html" %}
 
 {% block methone-links %}
-    { str:"Start", href:"/" }
+    {% if operational_areas %}
+        {% for area in operational_areas %}
+            {str:"{{ area }}", href:"{% url 'vp-operational_area' current_plan area %}"},
+        {% endfor %}
+
+    {% endif %}
 {% endblock %}
 
 {% block full_content %}
+    <div class="col-md-offset-2 col-md-8">
+        <h2>Välkommen till Verksamt!</h2>
+
+        <p>Verksamt är ett system för att hålla koll på Datasektionens verksamhetsplan.
+            Verksamhetsplanen är ett av sektionens kortsiktiga styrande dokument och beskriver en plan för vad sektionen
+            ska arbeta med och hur sektionen kan utvecklas.</p>
+
+        <p>I Verksamt kan så väl funktionärer som medlemmar kolla på sektionens verksamhetsplan, hur det går att
+            uppfylla mål
+            samt kommentera på hur man har arbetat med verksamhetsmålen.</p>
+
+        <p>Styrelsen kan i systemet ge mål olika statusar, såsom avklarade, påbörjade och ej genomförbara.</p>
+
+        <h2>Verksamhetsplaner</h2>
+        {% for year in operational_plans %}
+            <a href="{% url 'vp-operational_plan' year %}">Verksamhetsplanen {{ year }}</a><br>
+        {% endfor %}
+    </div>
 {% endblock %}
