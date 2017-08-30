@@ -22,6 +22,8 @@ urlpatterns = [
 
     url('^comment/(?P<pk>\d+)/edit/$',
         comment_views.edit_comment, name='vp-comment-edit'),
+    url('^comment/(?P<pk>\d+)/delete/$',
+        comment_views.delete_comment, name='vp-comment-delete'),
 
     url('^(?P<year>[^/]+)/$',
         operational_plan_views.get_operational_plan, name='vp-operational_plan'),

@@ -1,0 +1,11 @@
+{% extends "verksamhetsplan/main.html" %}
+
+{% block full_content %}
+    <div>
+        <p>Är du säker på att du vill ta bort objektet?</p>
+        <form method="POST" target="">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default">Ta bort kommentaren</button>
+        </form>
+    </div>
+{% endblock %}
