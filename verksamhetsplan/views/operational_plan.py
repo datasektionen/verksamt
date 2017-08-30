@@ -12,8 +12,10 @@ def get_operational_plan(request, year):
         raise Http404("Verksamhetsåret finns inte.")
 
     return render(request, "verksamhetsplan/operational_plan.html", {
+        'current_plan': year,
         'operational_plan': year,
-        'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=year).distinct()
+        'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=year)
+                  .order_by('id').distinct()
     })
 
 
@@ -29,6 +31,9 @@ def get_operational_area(request, year, area_name):
         raise Http404("Verksamhetsplansområdet finns inte.")
 
     return render(request, "verksamhetsplan/operational_area.html", {
+        'current_plan': year,
+        'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=year)
+                  .order_by('id').distinct(),
         'operational_area': operational_area,
         'goals': models.Goal.objects
                   .order_by('long_term_goal', 'long_term_goal__sub_area')
