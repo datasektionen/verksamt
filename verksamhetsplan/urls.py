@@ -1,5 +1,6 @@
 from django.conf.urls import url
 
+from verksamhetsplan.views import comment as comment_views
 from verksamhetsplan.views import general as general_views
 from verksamhetsplan.views import goal as goal_views
 from verksamhetsplan.views import long_term_goal as long_term_goal_views
@@ -15,6 +16,8 @@ urlpatterns = [
         goal_views.goal_by_id, name='vp-goal'),
     url('^goal/(?P<pk>\d+)/comment/$',
         goal_views.create_comment, name='vp-goal-comment'),
+    url('^comment/(?P<pk>\d+)/edit/$',
+        comment_views.edit_comment, name='vp-comment-edit'),
     url('^(?P<year>[^/]+)/$',
         operational_plan_views.get_operational_plan, name='vp-operational_plan'),
     url('^(?P<year>[^/]+)/(?P<area_name>[^/]+)/$',
