@@ -10,7 +10,17 @@
             <div class="panel-heading" style="padding-bottom: 30px">
                 <div>
                     <b class="pull-left">{{ comment.author.get_full_name }}</b>
-                    <span class="text-muted pull-right">{{ comment.created|date:"Y-m-d H:i" }}</span>
+                    <div class="pull-right">
+                        <span class="text-muted">{{ comment.created|date:"Y-m-d H:i" }}</span>
+                        {% if comment.author == user %}
+                            <a class="btn btn-default" href="{% url 'vp-comment-edit' comment.id %}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <a class="btn btn-danger" href="{% url 'vp-comment-delete' comment.id %}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <div class="panel-body">
