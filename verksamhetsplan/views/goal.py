@@ -16,7 +16,8 @@ def goal_by_id(request, pk):
                 'goal': goal,
                 'current_plan': goal.year,
                 'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=goal.year)
-                          .order_by('id').distinct()
+                          .order_by('id').distinct(),
+                'comment_form': modelform_factory(models.Comment, fields=('content', 'suggested_status'))()
             })
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
@@ -50,7 +51,12 @@ def create_comment(request, pk):
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
     if request.method == 'POST':
-        comment = models.Comment(goal=goal, author=request.user, content=request.POST['content'])
+        form_factory = modelform_factory(models.Comment, fields=('content', 'suggested_status'))
+        comment = models.Comment(author=request.user, goal=goal,
+                                 content=request.POST['comment_form.content'],
+                                 suggested_status_id=int(request.POST['suggested_status']))
+
         comment.save()
+
         return HttpResponseRedirect(reverse('vp-goal', args=[goal.id]))
 

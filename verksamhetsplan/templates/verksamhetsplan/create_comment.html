@@ -1,8 +1,12 @@
 <div class="col-sm-10 col-sm-offset-1">
     <form method="POST" action="comment/">
         {% csrf_token %}
-        <label for="content">Ny kommentar</label> <br>
-        <textarea name="content" rows="3" style="width: 100%"></textarea>
+        <label for="comment_form.content">Ny kommentar</label> <br>
+        <textarea name="comment_form.content" rows="3" style="width: 100%"></textarea>
+        {% if goal %}
+            <label for="{{ comment_form.suggested_status.id_for_label }}">Föreslå status (frivilligt):</label>
+            {{ comment_form.suggested_status }}
+        {% endif %}
         <button class="pull-right" type="submit">Skicka</button>
     </form>
 </div>
