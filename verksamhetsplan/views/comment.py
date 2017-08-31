@@ -16,7 +16,7 @@ def edit_comment(request, pk):
     if comment.author != request.user:
         return HttpResponseForbidden("Du får bara redigera dina egna kommentarer")
 
-    comment_form = modelform_factory(models.Comment, fields=('content',))
+    comment_form = modelform_factory(models.Comment, fields=('content', 'suggested_status'))
 
     if request.method == 'GET':
         return render(request, "verksamhetsplan/edit_comment.html", {
