@@ -79,9 +79,10 @@ class Comment(models.Model):
     goal = models.ForeignKey(Goal, null=True, blank=True)
     long_term_goal = models.ForeignKey(LongTermGoal, null=True, blank=True)
 
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    suggested_status = models.ForeignKey(Status, blank=True, null=True, on_delete=models.SET_NULL)
 
     def __unicode__(self):
         return self.content
