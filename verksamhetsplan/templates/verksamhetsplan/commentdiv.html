@@ -26,6 +26,15 @@
             <div class="panel-body">
                 {{ comment.content }}
             </div>
+            {% if comment.suggested_status %}
+                <div class="panel-footer">
+                    Föreslår statusen:
+                    <div class="label label-suggested_status"
+                         style="background: {{ comment.suggested_status.color }}; margin-left: 5px">
+                        {{ comment.suggested_status }}
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

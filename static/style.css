@@ -44,6 +44,11 @@
     float: right;
 }
 
+.label-suggested_status {
+    color: #292724;
+}
+
+
 .goaltext {
     background: #e0e1fa;
     padding: 10px;
