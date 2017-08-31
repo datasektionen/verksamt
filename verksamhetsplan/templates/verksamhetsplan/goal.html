@@ -30,7 +30,7 @@
             <p> {{ goal.description }}</p>
         {% endif %}
         <h2>Kommentarer</h2>
-        {% for comment in goal.comment_set.all %}
+        {% for comment in goal.comment_set.all reversed %}
             {% include "verksamhetsplan/commentdiv.html" %}
         {% empty %}
             Det finns inga kommentarer.

@@ -22,7 +22,7 @@
             Det finns inga delmål
         {% endfor %}
         <h2>Kommentarer</h2>
-        {% for comment in long_term_goal.comment_set.all %}
+        {% for comment in long_term_goal.comment_set.all reversed %}
             {% include "verksamhetsplan/commentdiv.html" %}
         {% empty %}
             Det finns inga kommentarer.
