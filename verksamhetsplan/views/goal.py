@@ -28,7 +28,7 @@ def edit_goal(request, pk):
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
 
-    if dauth.has_permission('drek', request):
+    if not dauth.has_permission('drek', request.user):
         return HttpResponseForbidden("Du har inte rättigheter att redigera det här målet")
 
     goal_form = modelform_factory(models.Goal, fields=('goal', 'description', 'status'))

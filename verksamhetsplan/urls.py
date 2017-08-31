@@ -10,6 +10,8 @@ urlpatterns = [
     url('^$', general_views.index),
     url('^long_term/(?P<pk>\d+)/$',
         long_term_goal_views.long_term_goal_by_id, name='vp-long_goal'),
+    url('^long_term/(?P<pk>\d+)/edit/$',
+        long_term_goal_views.edit_long_term_goal, name='vp-long_goal-edit'),
     url('^long_term/(?P<pk>\d+)/comment/$',
         long_term_goal_views.create_comment, name='vp-long_goal-comment'),
 

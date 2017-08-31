@@ -42,13 +42,5 @@ def get_permissions(user):
     ).content.decode('utf-8')))
 
 
-def has_permission(permission, request):
-    if 'permissions' not in request.session:
-        # Fetch permissions from pls and store timestamp
-        response = requests.get(
-                'http://pls.datasektionen.se/api/user/' + request.user.username + '/verksamt/'
-        )
-
-        request.session['permissions'] = json.loads(urllib.parse.unquote(response.content.decode('utf-8')))
-
-    return permission in request.session['permissions']
+def has_permission(permission, user):
+    return permission in get_permissions(user)
