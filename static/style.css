@@ -37,6 +37,11 @@
 .statustext {
     font-weight: bold;
     text-align: right;
+    margin-right: 10px;
+}
+
+.responsible_text {
+    font-weight: bold;
 }
 
 .label-status {
