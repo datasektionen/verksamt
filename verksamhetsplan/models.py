@@ -2,6 +2,17 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+class Group(models.Model):
+    name = models.TextField()
+    email = models.TextField()
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
+
 class Status(models.Model):
     name = models.CharField(max_length=10)
     color = models.CharField(max_length=7)
@@ -66,6 +77,7 @@ class Goal(models.Model):
     goal = models.TextField()
     description = models.TextField(default="", blank=True)
     status = models.ForeignKey(Status, null=True, on_delete=models.SET_NULL)
+    responsible_groups = models.ManyToManyField(Group)
 
     def __unicode__(self):
         return self.goal
