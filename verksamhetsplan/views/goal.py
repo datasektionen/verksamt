@@ -32,7 +32,7 @@ def edit_goal(request, pk):
     if not dauth.has_permission('drek', request.user):
         return HttpResponseForbidden("Du har inte rättigheter att redigera det här målet")
 
-    goal_form = modelform_factory(models.Goal, fields=('goal', 'description', 'status'))
+    goal_form = modelform_factory(models.Goal, fields=('goal', 'description', 'status', 'responsible_groups'))
 
     if request.method == 'GET':
         return render(request, "verksamhetsplan/edit_goal.html", {

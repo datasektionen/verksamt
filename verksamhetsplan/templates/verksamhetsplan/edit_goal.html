@@ -29,6 +29,13 @@
                 <div class="col-md-7">{{ form.status|add_class:"form-control" }}</div>
             </div>
             <div class="form-group">
+                {{ form.responsible_groups.errors }}
+                <label for="{{ form.responsible_groups.id_for_label }}" class="col-md-offset-1 col-md-2 control-label">
+                    Status:
+                </label>
+                <div class="col-md-7">{{ form.responsible_groups|add_class:"form-control" }}</div>
+            </div>
+            <div class="form-group">
                 <div class="col-md-offset-10 col-md-2">
                     <button type="submit" class="btn btn-default">Uppdatera målet</button>
                 </div>
