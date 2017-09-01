@@ -36,6 +36,6 @@ def get_operational_area(request, year, area_name):
                   .order_by('id').distinct(),
         'operational_area': operational_area,
         'goals': models.Goal.objects
-                  .order_by('long_term_goal', 'long_term_goal__sub_area')
+                  .order_by('long_term_goal', 'long_term_goal__sub_area', 'id')
                   .filter(year=year, long_term_goal__sub_area__operational_area=operational_area)
     })
