@@ -22,6 +22,10 @@
             </div>
         </h1>
 
+        <p> Ansvarig{{ goal.responsible_groups.all | pluralize:"a" }}
+            funktionär{{ goal.responsible_groups.all | pluralize:"er" }}:
+            <b class="responsible_text">{% for group in goal.responsible_groups.all %}
+                {{ group }}{% if not forloop.last %},{% endif %}{% endfor %}</b></p>
 
         <div class="well goaltext">{{ goal.goal }}</div>
 
