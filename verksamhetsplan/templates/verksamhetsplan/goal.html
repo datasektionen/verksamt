@@ -16,9 +16,18 @@
           <li class="active">Mål</li>
         </ol>
         <h1>Mål
-            <div class="float-right label label-status"
-                 style="background: {{ goal.status.color }};">
+            <div style="float: right;">
+                <div class="label label-status"
+                     style="background: {{ goal.status.color }};">
                     {{ goal.status }}
+                </div>
+                {% if may_edit %}
+                    <a href="{% url 'vp-goal-edit' goal.id %}">
+                        <div class="label label-default" style="margin-left: 10px">
+                            <span class="glyphicon glyphicon-edit"></span> Redigera
+                        </div>
+                    </a>
+                {% endif %}
             </div>
         </h1>
 

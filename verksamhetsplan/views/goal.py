@@ -15,9 +15,10 @@ def goal_by_id(request, pk):
             return render(request, "verksamhetsplan/goal.html", {
                 'goal': goal,
                 'current_plan': goal.year,
+                'comment_form': modelform_factory(models.Comment, fields=('content', 'suggested_status'))(),
+                'may_edit': may_edit(request),
                 'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=goal.year)
                           .order_by('id').distinct(),
-                'comment_form': modelform_factory(models.Comment, fields=('content', 'suggested_status'))()
             })
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
@@ -29,7 +30,7 @@ def edit_goal(request, pk):
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
 
-    if not dauth.has_permission('drek', request.user):
+    if not may_edit(request):
         return HttpResponseForbidden("Du har inte rättigheter att redigera det här målet")
 
     goal_form = modelform_factory(models.Goal, fields=('goal', 'description', 'status', 'responsible_groups'))
@@ -60,3 +61,6 @@ def create_comment(request, pk):
 
         return HttpResponseRedirect(reverse('vp-goal', args=[goal.id]))
 
+
+def may_edit(request):
+    return dauth.has_permission('drek', request.user)
