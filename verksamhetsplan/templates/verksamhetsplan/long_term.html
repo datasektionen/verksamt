@@ -4,7 +4,18 @@
 
 {% block full_content %}
     <div class="col-md-10 col-md-offset-1">
-        <h1>Flerårigt mål</h1>
+        <h1>
+            Flerårigt mål
+            {% if may_edit %}
+                <div style="float: right;">
+                    <a href="{% url 'vp-long_goal-edit' long_term_goal.id %}">
+                        <div class="label label-default" style="margin-left: 10px">
+                            <span class="glyphicon glyphicon-edit"></span> Redigera
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+        </h1>
         <div class="well goaltext">
             {{ long_term_goal.goaltext }}
         </div>

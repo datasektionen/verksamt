@@ -15,7 +15,8 @@ def long_term_goal_by_id(request, pk):
             return render(request, "verksamhetsplan/long_term.html", {
                 'long_term_goal': long_term_goal,
                 'goals': long_term_goal.goal_set.order_by('year'),
-                'comment_form': modelform_factory(models.Comment, fields=('content',))()
+                'comment_form': modelform_factory(models.Comment, fields=('content',))(),
+                'may_edit': may_edit(request),
             })
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
@@ -27,7 +28,7 @@ def edit_long_term_goal(request, pk):
     except ObjectDoesNotExist:
         raise Http404("Målet finns inte")
 
-    if not dauth.has_permission('drek', request.user):
+    if not may_edit(request):
         return HttpResponseForbidden("Du har inte rättigheter att redigera det här målet")
 
     goal_form = modelform_factory(models.LongTermGoal, fields=('goaltext', 'description'))
@@ -52,3 +53,7 @@ def create_comment(request, pk):
         comment = models.Comment(long_term_goal=goal, author=request.user, content=request.POST['comment_form.content'])
         comment.save()
         return HttpResponseRedirect(reverse('vp-long_goal', args=[goal.id]))
+
+
+def may_edit(request):
+    return dauth.has_permission('drek', request.user)
