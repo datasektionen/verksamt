@@ -32,4 +32,6 @@ urlpatterns = [
 
     url('^(?P<year>[^/]+)/(?P<area_name>[^/]+)/$',
         operational_plan_views.get_operational_area, name='vp-operational_area'),
+    url('^(?P<year>[^/]+)/(?P<area_name>[^/]+)/edit/$',
+        operational_plan_views.edit_operational_area, name='vp-operational_area-edit'),
 ]
