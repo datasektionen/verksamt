@@ -14,7 +14,7 @@
                             <form action="{% url "vp-goal-create" prev.year prev.long_term_goal.id %}" method="post">
                                 {% csrf_token %}
                                 <textarea class="col-md-7" rows="4" name="goal"></textarea>
-                                <div class="col-md-2 col-md-offset-1">{{ goal_form.responsible_groups }}</div>
+                                <div class="col-md-3">{{ goal_form.responsible_groups }}</div>
                                 <div class="col-md-1">{{ goal_form.status }}</div>
                                 <div class="col-md-1">
                                     <button class="btn btn-default">Skapa</button>
@@ -36,7 +36,7 @@
                             <form action="{% url "vp-goal-create" prev.year prev.long_term_goal.id %}" method="post">
                                 {% csrf_token %}
                                 <textarea class="col-md-7" rows="4" name="goal"></textarea>
-                                <div class="col-md-2 col-md-offset-1">{{ goal_form.responsible_groups }}</div>
+                                <div class="col-md-3">{{ goal_form.responsible_groups }}</div>
                                 <div class="col-md-1">{{ goal_form.status }}</div>
                                 <div class="col-md-1">
                                     <button class="btn btn-default">Skapa</button>
@@ -59,7 +59,7 @@
                         <form action="{% url "vp-goal-create" goal.year goal.long_term_goal.id %}" method="post">
                             {% csrf_token %}
                             <textarea class="col-md-7" rows="4" name="goal"></textarea>
-                            <div class="col-md-2 col-md-offset-1">{{ goal_form.responsible_groups }}</div>
+                            <div class="col-md-3">{{ goal_form.responsible_groups }}</div>
                             <div class="col-md-1">{{ goal_form.status }}</div>
                             <div class="col-md-1">
                                 <button class="btn btn-default">Skapa</button>
