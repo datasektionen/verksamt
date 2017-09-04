@@ -7,21 +7,66 @@
     <div>
         {% for goal in goals %}
             {% with goals|prev:forloop.counter0 as prev %}
+
                 {% ifchanged goal.long_term_goal.sub_area %}
-                    <div class="minor_goal">
-                        Create new goal for area: {{ prev.long_term_goal.sub_area }}
-                    </div>
+                    {% if not forloop.first %}
+                        <div class="minor_goal clearfix">
+                            <form action="{% url "vp-goal-create" prev.year prev.long_term_goal.id %}" method="post">
+                                {% csrf_token %}
+                                <textarea class="col-md-7" rows="4" name="goal"></textarea>
+                                <div class="col-md-2 col-md-offset-1">{{ goal_form.responsible_groups }}</div>
+                                <div class="col-md-1">{{ goal_form.status }}</div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-default">Skapa</button>
+                                </div>
+                            </form>
+                        </div>
+                    {% endif %}
+
+
                     <div class="area">
                         {{ goal.long_term_goal.sub_area }}
                     </div>
                 {% endifchanged %}
+
+
                 {% ifchanged goal.long_term_goal %}
+                    {% ifchanged goal.long_term_goal.sub_area %}{% else %} <!--If not changed -->
+                        <div class="minor_goal clearfix">
+                            <form action="{% url "vp-goal-create" prev.year prev.long_term_goal.id %}" method="post">
+                                {% csrf_token %}
+                                <textarea class="col-md-7" rows="4" name="goal"></textarea>
+                                <div class="col-md-2 col-md-offset-1">{{ goal_form.responsible_groups }}</div>
+                                <div class="col-md-1">{{ goal_form.status }}</div>
+                                <div class="col-md-1">
+                                    <button class="btn btn-default">Skapa</button>
+                                </div>
+                            </form>
+                        </div>
+                    {% endifchanged %}
+
                     <div class="major_goal" onclick="window.location='{% url 'vp-long_goal' goal.long_term_goal.id %}'">
                         <div>{{ goal.long_term_goal }}</div>
                     </div>
-
                 {% endifchanged %}
-                {% include "verksamhetsplan/goaldiv.html" %}
+
+
+                {% include "verksamhetsplan/edit_goaldiv.html" %}
+
+
+                {% if forloop.last %}
+                    <div class="minor_goal clearfix">
+                        <form action="{% url "vp-goal-create" prev.year prev.long_term_goal.id %}" method="post">
+                            {% csrf_token %}
+                            <textarea class="col-md-7" rows="4" name="goal"></textarea>
+                            <div class="col-md-2 col-md-offset-1">{{ goal_form.responsible_groups }}</div>
+                            <div class="col-md-1">{{ goal_form.status }}</div>
+                            <div class="col-md-1">
+                                <button class="btn btn-default">Skapa</button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
             {% endwith %}
         {% endfor %}
     </div>
