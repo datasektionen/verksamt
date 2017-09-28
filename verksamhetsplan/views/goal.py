@@ -8,6 +8,23 @@ from verksamhetsplan import models
 from verksamt import dauth
 
 
+def goal_create(request, year, long_term_goal_id):
+    if not may_edit(request):
+        return HttpResponseForbidden("Du har inte rättigheter att skapa mål")
+
+    if request.method == 'POST':
+        goal_form = modelform_factory(models.Goal, fields=('goal', 'description', 'status', 'responsible_groups'))
+        received_form = goal_form(request.POST,
+                                  instance=models.Goal(
+                                      year=models.OperationalPlan.objects.get(year=year),
+                                      long_term_goal_id=int(long_term_goal_id)
+                                  ))
+        if received_form.is_valid():
+            goal = received_form.save()
+        return HttpResponseRedirect(reverse('vp-operational_area-edit',
+                                            args=[year, goal.long_term_goal.sub_area.operational_area]))
+
+
 def goal_by_id(request, pk):
     try:
         goal = models.Goal.objects.get(pk=int(pk))
@@ -44,6 +61,23 @@ def edit_goal(request, pk):
         if received_form.is_valid():
             received_form.save()
         return HttpResponseRedirect(reverse('vp-goal', args=[goal.id]))
+
+
+def delete_goal(request, pk):
+    try:
+        goal = models.Goal.objects.get(pk=int(pk))
+    except ObjectDoesNotExist:
+        raise Http404("Målet finns inte")
+
+    if not may_edit(request):
+        return HttpResponseForbidden("Du har inte rättigheter att ta bort det här målet")
+
+    if request.method == 'GET':
+        return render(request, "verksamhetsplan/confirm_delete.html")
+    elif request.method == 'POST':
+        goal.delete()
+        return HttpResponseRedirect(
+            reverse('vp-operational_area-edit', args=[goal.year, goal.long_term_goal.sub_area.operational_area]))
 
 
 def create_comment(request, pk):

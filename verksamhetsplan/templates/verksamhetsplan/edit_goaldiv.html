@@ -1,0 +1,19 @@
+<div class="minor_goal clearfix" style="border-color: {{ goal.status.color }}"
+     onclick="window.location='{% url 'vp-goal' goal.id %}'"
+>
+    <div class="col-md-8">{{ goal.goal }}</div>
+    <div class="col-md-2 responsible_text">
+        {% for group in goal.responsible_groups.all %}
+            {{ group }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+
+    </div>
+    <div class="col-md-1">
+        <div class="statustext">{{ goal.status }}</div>
+    </div>
+    <div class="col-md-1">
+        <a class="btn btn-danger" style="margin-left: 10%" href="{% url "vp-goal-delete" goal.id %}">
+            <span class="glyphicon glyphicon-trash" style="color: white;"></span>
+        </a>
+    </div>
+</div>

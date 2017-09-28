@@ -15,10 +15,14 @@ urlpatterns = [
     url('^long_term/(?P<pk>\d+)/comment/$',
         long_term_goal_views.create_comment, name='vp-long_goal-comment'),
 
+    url('^goal/create/year/(?P<year>[^/]+)/long_term/(?P<long_term_goal_id>\d+)/$',
+        goal_views.goal_create, name='vp-goal-create'),
     url('^goal/(?P<pk>\d+)/$',
         goal_views.goal_by_id, name='vp-goal'),
     url('^goal/(?P<pk>\d+)/edit/$',
         goal_views.edit_goal, name='vp-goal-edit'),
+    url('^goal/(?P<pk>\d+)/delete/$',
+        goal_views.delete_goal, name='vp-goal-delete'),
     url('^goal/(?P<pk>\d+)/comment/$',
         goal_views.create_comment, name='vp-goal-comment'),
 
@@ -37,4 +41,6 @@ urlpatterns = [
 
     url('^(?P<year>[^/]+)/(?P<area_name>[^/]+)/$',
         operational_plan_views.get_operational_area, name='vp-operational_area'),
+    url('^(?P<year>[^/]+)/(?P<area_name>[^/]+)/edit/$',
+        operational_plan_views.edit_operational_area, name='vp-operational_area-edit'),
 ]
