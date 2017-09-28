@@ -27,6 +27,11 @@ urlpatterns = [
     url('^comment/(?P<pk>\d+)/delete/$',
         comment_views.delete_comment, name='vp-comment-delete'),
 
+    url('^groups/$',
+        general_views.groups, name='vp-groups'),
+    url('^group/(?P<name>[^/]+)/$',
+        general_views.group, name='vp-group'),
+
     url('^(?P<year>[^/]+)/$',
         operational_plan_views.get_operational_plan, name='vp-operational_plan'),
 

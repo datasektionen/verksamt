@@ -1,0 +1,16 @@
+{% extends 'verksamhetsplan/main.html' %}
+
+{% block full_content %}
+    <div class="col-md-6 col-md-offset-3">
+        <p>
+            Här kan du klicka på en funktionärspost för att se vilka verksamhetsplansmål den funktionärsposten är
+            ansvarig för.
+            Perfekt om du undrar vilka mål just du är ansvarig för!
+        </p>
+        <div class="col-md-8 col-md-offset-1">
+            {% for group in groups %}
+                <p><a href="{% url 'vp-group' group.name %}">{{ group.name }}</a></p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
