@@ -20,14 +20,12 @@
 }
 
 .major_goal {
-    background: #ec5f99;
     color: #f7f7f7;
     padding: 10px;
     cursor: pointer;
 }
 
 .area {
-    background: #e83d84;
     padding: 10px;
     font-weight: bold;
     font-size: larger;

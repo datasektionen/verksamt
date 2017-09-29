@@ -6,12 +6,13 @@
     <div>
         {% for goal in goals %}
             {% ifchanged goal.long_term_goal.sub_area %}
-                <div class="area">
+                <div class="area lighten-2">
                     {{ goal.long_term_goal.sub_area }}
                 </div>
             {% endifchanged %}
             {% ifchanged goal.long_term_goal %}
-                <div class="major_goal" onclick="window.location='{% url 'vp-long_goal' goal.long_term_goal.id %}'">
+                <div class="major_goal lighten-3"
+                     onclick="window.location='{% url 'vp-long_goal' goal.long_term_goal.id %}'">
                     <div>{{ goal.long_term_goal }}</div>
                 </div>
 
