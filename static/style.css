@@ -14,7 +14,7 @@
 }
 
 .minor_goal {
-    border: 2px solid;
+    border: 2px solid #f5f5f5;
     padding: 10px;
     cursor: pointer;
 }
@@ -34,7 +34,7 @@
 
 .statustext {
     font-weight: bold;
-    text-align: right;
+    text-align: left;
     margin-right: 10px;
 }
 

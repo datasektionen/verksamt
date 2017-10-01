@@ -1,7 +1,15 @@
-<div class="minor_goal clearfix" style="border-color: {{ goal.status.color }}"
+<div class="minor_goal clearfix"
      onclick="window.location='{% url 'vp-goal' goal.id %}'"
 >
-    <div class="col-md-9">{{ goal.goal }}</div>
+
+    <div class="col-md-9">
+        <div class="col-md-1"><span class="glyphicon glyphicon-ok-sign"
+                                    style="font-size: larger; color: {{ goal.status.color }}; text-align: center;"
+                                    aria-hidden="true"></span></div>
+        <div class="col-md-11">
+            {{ goal.goal }}
+        </div>
+    </div>
     <div class="col-md-2 responsible_text">
         {% for group in goal.responsible_groups.all %}
             {{ group }}{% if not forloop.last %},{% endif %}
