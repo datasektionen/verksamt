@@ -15,6 +15,7 @@ def long_term_goal_by_id(request, pk):
             return render(request, "verksamhetsplan/long_term.html", {
                 'long_term_goal': long_term_goal,
                 'goals': long_term_goal.goal_set.order_by('year'),
+                'operational_plans': models.OperationalPlan.objects.order_by('-id')[:5],
                 'comment_form': modelform_factory(models.Comment, fields=('content',))(),
                 'may_edit': may_edit(request),
             })
@@ -35,7 +36,8 @@ def edit_long_term_goal(request, pk):
 
     if request.method == 'GET':
         return render(request, "verksamhetsplan/edit_long_term_goal.html", {
-            'form': goal_form(instance=goal)
+            'form': goal_form(instance=goal),
+            'operational_plans': models.OperationalPlan.objects.order_by('-id')[:5],
         })
     elif request.method == 'POST':
         received_form = goal_form(request.POST, instance=goal)

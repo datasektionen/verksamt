@@ -16,6 +16,7 @@ def get_operational_plan(request, year):
     return render(request, "verksamhetsplan/operational_plan.html", {
         'current_plan': year,
         'operational_plan': year,
+        'operational_plans': models.OperationalPlan.objects.order_by('-id')[:5],
         'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=year)
                   .order_by('id').distinct()
     })
@@ -35,11 +36,10 @@ def get_operational_area(request, year, area_name):
     return render(request, "verksamhetsplan/operational_area.html", {
         'current_plan': year,
         'operational_area': operational_area,
+        'operational_plans': models.OperationalPlan.objects.order_by('-id')[:5],
         'goals': models.Goal.objects
                   .order_by('long_term_goal', 'long_term_goal__sub_area', 'id')
                   .filter(year=year, long_term_goal__sub_area__operational_area=operational_area),
-        'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=year)
-                  .order_by('id').distinct(),
     })
 
 
@@ -63,9 +63,8 @@ def edit_operational_area(request, year, area_name):
         'current_plan': year,
         'operational_area': operational_area,
         'goal_form': goal_form,
+        'operational_plans': models.OperationalPlan.objects.order_by('-id')[:5],
         'goals': models.Goal.objects
                   .order_by('long_term_goal', 'long_term_goal__sub_area', 'id')
                   .filter(year=year, long_term_goal__sub_area__operational_area=operational_area),
-        'operational_areas': models.OperationalArea.objects.filter(subarea__longtermgoal__goal__year=year)
-                  .order_by('id').distinct(),
     })

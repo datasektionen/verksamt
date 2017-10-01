@@ -47,6 +47,8 @@ def delete_comment(request, pk):
         if comment.goal:
             return HttpResponseRedirect(reverse('vp-goal', args=[comment.goal_id]))
     elif request.method == 'GET':
-        return render(request, 'verksamhetsplan/confirm_delete.html')
+        return render(request, 'verksamhetsplan/confirm_delete.html', {
+            'operational_plans': models.OperationalPlan.objects.order_by('-id')[:5],
+        })
     else:
         raise Http404()

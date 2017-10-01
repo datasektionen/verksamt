@@ -1,12 +1,13 @@
 {% extends "main.html" %}
 
 {% block methone-links %}
-    {% if operational_areas %}
-        {% for area in operational_areas %}
-            {str:"{{ area }}", href:"{% url 'vp-operational_area' current_plan area %}"},
+    {% if operational_plans %}
+        {% for operational_plan in operational_plans %}
+            {str:"{{ operational_plan.year }}", href:"{% url 'vp-operational_plan' operational_plan.year %}"},
         {% endfor %}
 
     {% endif %}
+    {str:"Ansvariga funktionärer", href:"{% url 'vp-groups' %}"},
 {% endblock %}
 
 {% block full_content %}
