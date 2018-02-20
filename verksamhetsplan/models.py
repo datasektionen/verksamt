@@ -97,7 +97,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    suggested_status = models.ForeignKey(Status, blank=True, null=True, on_delete=models.SET_NULL)
+    suggested_status = models.ForeignKey(Status)
 
     def __unicode__(self):
         return self.content
